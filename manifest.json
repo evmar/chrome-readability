@@ -1,0 +1,22 @@
+{
+  "name": "Readability",
+  "version": "1.0",
+  "description": "Readability for Chrome",
+  "permissions": [
+    "tabs"
+  ],
+  "background_page": "background.html",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["enable-readability.js"]
+    }
+  ],
+  "page_actions": [
+    {
+      "id": "readability",
+      "name": "make readable",
+      "icons": ["readability.png"]
+    }
+  ]
+}
