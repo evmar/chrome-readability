@@ -1,3 +1,5 @@
+// These don't make it through to the readability-injected <script> because
+// of isolated worlds.  :~(
 var readStyle='style-novel';
 var readSize='size-medium';
 var readMargin='margin-wide';
@@ -23,7 +25,6 @@ function readabilityize() {
 
 chrome.extension.onConnect.addListener(function(port) {
   port.onMessage.addListener(function(msg) {
-    alert("message! " + msg);
     readabilityize();
   });
 });

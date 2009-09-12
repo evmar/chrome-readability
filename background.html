@@ -2,13 +2,11 @@
 var kActionId = "readability";
 
 chrome.tabs.onCreated.addListener(function(tab) {
-  console.log("tab " + tab.id + " created");
   chrome.pageActions.enableForTab(kActionId,
                                   { tabId: tab.id, url: tab.url });
 });
 
 chrome.tabs.onUpdated.addListener(function(tabid, info) {
-  console.log("tab " + tabid + " updated");
   if (info.url) {
     chrome.pageActions.enableForTab(kActionId,
                                     { tabId: tabid, url: info.url });
@@ -16,8 +14,7 @@ chrome.tabs.onUpdated.addListener(function(tabid, info) {
 });
 
 chrome.pageActions["readability"].addListener(function(actionid, info) {
-  console.log(info.tabUrl);
-  chrome.tabs.connect(info.tabId).postMessage("hello");
+  chrome.tabs.connect(info.tabId).postMessage("go");
 });
 
 </script>
