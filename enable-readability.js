@@ -1,3 +1,10 @@
+// BUG 17410: If a content script doesn't use a DOM event, it can get GC'd.
+function dummy(){
+  console.log(chrome.extension);
+}
+window.addEventListener("load", dummy, false);
+
+
 // These don't make it through to the readability-injected <script> because
 // of isolated worlds.  :~(
 var readStyle='style-novel';
@@ -25,6 +32,7 @@ function readabilityize() {
 
 chrome.extension.onConnect.addListener(function(port) {
   port.onMessage.addListener(function(msg) {
+  if (window == top) {
     readabilityize();
-  });
+  }
 });
