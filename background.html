@@ -1,22 +1,5 @@
 <script>
-var kActionId = "readability";
-
-// BUG 21729: It would be better if there were unambiguous page loading/loaded
-// events, that came with URLs every time.
-chrome.tabs.onUpdated.addListener(function(tabid, info) {
-  if (info.status == 'loading') {
-    // Blech: We need the URL parameter for enableForTab(), but for reloads,
-    // status==loading doesn't contain it (because it hasn't changed).  So we
-    // need to now turn around and re-request the URL.
-    chrome.tabs.get(tabid, function(tab) {
-      chrome.pageActions.enableForTab(kActionId,
-                                      { tabId: tab.id, url: tab.url });
-    });
-  }
+chrome.browserAction.onClicked.addListener(function(tab) {
+  chrome.tabs.executeScript(tab.id, {file:'enable-readability.js'});
 });
-
-chrome.pageActions["readability"].addListener(function(actionid, info) {
-  chrome.tabs.connect(info.tabId).postMessage("go");
-});
-
 </script>

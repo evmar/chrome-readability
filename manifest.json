@@ -3,20 +3,13 @@
   "version": "1.0",
   "description": "Readability for Chrome",
   "permissions": [
-    "tabs"
+    "tabs",
+    "http://*/*",
+    "https://*/*"
   ],
   "background_page": "background.html",
-  "content_scripts": [
-    {
-      "matches": ["http://*/*"],
-      "js": ["enable-readability.js"]
-    }
-  ],
-  "page_actions": [
-    {
-      "id": "readability",
-      "name": "make readable",
-      "icons": ["readability.png"]
-    }
-  ]
+  "browser_action": {
+    "default_icon": "readability.png",
+    "default_title": "readability"
+  }
 }
